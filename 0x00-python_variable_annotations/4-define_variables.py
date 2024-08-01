@@ -1,22 +1,14 @@
 #!/usr/bin/env python3
+"""Demonstrates variable definitions with type annotations."""
 
-"""module will annotates the variables"""
+# Integer variable
+number_of_apples: int = 1
 
-from typing import Union
+# Floating-point variable
+circle_constant: float = 3.14
 
-def annotate_variables() -> None:
-    a: int = 1
-    pi: float = 3.14
-    i_understand_annotations: bool = True
-    school: str = 'Holberton'
+# Boolean variable
+comprehension_status: bool = True
 
-    def print_variable(name: str, value: Union[int, float, bool, str]) -> None:
-        print(f"{name} is a {type(value)} with a value of {value}")
-
-    print_variable("a", a)
-    print_variable("pi", pi)
-    print_variable("i_understand_annotations", i_understand_annotations)
-    print_variable("school", school)
-
-if __name__ == '__main__':
-    annotate_variables()
+# String variable
+learning_institution: str = "Holberton"
