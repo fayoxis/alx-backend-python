@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Module for creating a multiplier function.
 """
+
 from typing import Callable
 
 
