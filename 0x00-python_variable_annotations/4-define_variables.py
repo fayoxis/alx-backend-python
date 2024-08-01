@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""modules."""
+"""Task 4's module."""
 
 
 def define_variables() -> None:
-    """this will Define and annotate variables with different types."""
+    """Define and annotate variables with different types."""
     a: int = 1
     pi: float = 3.14
     i_understand_annotations: bool = True
