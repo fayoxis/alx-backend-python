@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
-"""Task 4's module."""
+"""modules."""
 
-# Declare variables with type annotations
-a = 1  # int
-pi = 3.14  # float
-i_understand_annotations = True  # bool
-school = "Holberton"  # str
 
-# Print the variables
-print(a, "is of type", type(a))
-print(pi, "is of type", type(pi))
-print(i_understand_annotations, "is of type", type(i_understand_annotations))
-print(school, "is of type", type(school))
+def define_variables() -> None:
+    """this will Define and annotate variables with different types."""
+    a: int = 1
+    pi: float = 3.14
+    i_understand_annotations: bool = True
+    school: str = 'Holberton'
+
+
+if __name__ == "__main__":
+    define_variables()
