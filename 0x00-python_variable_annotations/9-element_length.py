@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-
 """
 This code demonstrates type annotations for function
 parameters and return values. The `element_length` function
