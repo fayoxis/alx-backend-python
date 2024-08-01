@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-'''Module for task 3.'''
+'''Modules.'''
 
-def to_str(n: float) -> str:
+def to_str(num: float) -> str:
     """
     Convert a floating-point number to a string.
 
@@ -11,4 +11,4 @@ def to_str(n: float) -> str:
     Returns:
         str: The string representation of the input number.
     """
-    return str(n)
+    return str(num)
