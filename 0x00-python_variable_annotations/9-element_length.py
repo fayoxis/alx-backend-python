@@ -1,10 +1,19 @@
 #!/usr/bin/env python3
-'''Task 9's module.
-'''
-from typing import Iterable, List, Sequence, Tuple
+"""Module for computing the length of sequences in a list."""
 
 
-def element_length(lst: Iterable[Sequence]) -> List[Tuple[Sequence, int]]:
-    '''Computes the length of a list of sequences.
-    '''
-    return [(i, len(i)) for i in lst]
+def element_length(sequences: list) -> list:
+    """
+    Compute the length of each sequence in a list of sequences.
+
+    Args:
+        sequences (list): A list of sequences (e.g., lists, tuples, strings).
+
+    Returns:
+        list: A list of tuples, where each tuple contains the original sequence
+        and its length.
+    """
+    lengths = []
+    for seq in sequences:
+        lengths.append((seq, len(seq)))
+    return lengths
