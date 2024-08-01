@@ -1,16 +1,20 @@
 #!/usr/bin/env python3
-"""Module for calculating the length of sequences in a list."""
+"""
+A function with annotated parameters and
+return values using appropriate types.
+"""
+from typing import Iterable, Sequence, List, Tuple
 
 
-def element_length(sequences: list) -> list:
+def get_sequence_lengths(sequences: Iterable[Sequence]) -> List[Tuple[Sequence, int]]:
     """
-    Compute the length of each sequence in the given list.
+    Returns a list of tuples containing each sequence and its length.
 
     Args:
-        sequences (list): A list of sequences (e.g., strings, lists, tuples).
+        sequences (Iterable[Sequence]): An iterable of sequences.
 
     Returns:
-        list: A list of tuples, where each tuple contains the original sequence
-              and its length.
+        List[Tuple[Sequence, int]]: A list of tuples, where each tuple contains
+            a sequence and its length.
     """
     return [(seq, len(seq)) for seq in sequences]
