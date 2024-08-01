@@ -3,11 +3,8 @@
 from typing import Any, Union, Sequence
 
 
-def safe_first_element(lst: Sequence) -> Union[Any, None]:
-    """
-    Return the first element of a sequence (list, tuple, etc.)
-    or None if the sequence is empty.
-    """
+def safe_first_element(lst: Sequence[Any]) -> Union[Any, None]:
+    """ a list or None if the list is empty."""
     if lst:
         return lst[0]
     else:
