@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Demonstrates variable definitions with type annotations."""
 
+
 # Integer variable
 number_of_apples: int = 1
 
