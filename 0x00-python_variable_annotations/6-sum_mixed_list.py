@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """Module for summing mixed numeric lists.
 """
-
 from typing import List, Union
 
 
