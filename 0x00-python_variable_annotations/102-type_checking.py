@@ -17,9 +17,7 @@ def zoom_array(lst: Tuple, factor: int = 2) -> List:
     Returns:
         List: A list of integers multiplied by the given factor.
     """
-    zoomed_list = []
-    for item in lst:
-        zoomed_list.extend([item] * factor)
+    zoomed_list = [item for item in lst for _ in range(factor)]
     return zoomed_list
 
 
