@@ -3,13 +3,13 @@
 
 
 # Integer variable
-number_of_apples: int = 1
+a: int = 1
 
 # Floating-point variable
-circle_constant: float = 3.14
+pi: float = 3.14
 
 # Boolean variable
-comprehension_status: bool = True
+i_understand_annotations: bool = True
 
 # String variable
-learning_institution: str = "Holberton"
+school: str = "Holberton"
