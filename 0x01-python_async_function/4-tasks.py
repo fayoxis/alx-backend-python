@@ -4,9 +4,10 @@
 from typing import List
 import asyncio
 
+
 async def task_wait_n(n: int, max_delay: int) -> List[float]:
     """
-    Spawns wait_random n times with the specified max_delay
+    times with the specified max_delay
     and returns the list of all the delays (float values).
     """
     delays = []
