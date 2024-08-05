@@ -6,9 +6,7 @@ import asyncio
 
 
 async def task_wait_n(n: int, max_delay: int) -> List[float]:
-    """
-    task_wait_random function 'n' times with the specified 'max_delay',
-    and returns a list of all the generated delays (float values).
+    """ times with the specified 'max_delay', and returns a list
     """
     delays = []
     tasks = [asyncio.create_task(task_wait_random(max_delay)) for _ in range(n)]
@@ -22,8 +20,7 @@ async def task_wait_n(n: int, max_delay: int) -> List[float]:
 
 # Function to be imported
 async def task_wait_random(max_delay: int) -> float:
-    """
-    Waits for random delay between 0 -'max_delay' and returns the delay.
+    """ Waits for random delay between 0 -'max_delay' and returns the delay.
     """
     import random
     delay = random.uniform(0, max_delay)
