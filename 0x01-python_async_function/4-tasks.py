@@ -15,7 +15,6 @@ async def task_wait_n(n: int, max_delay: int) -> List[float]:
         delay = await task
         delays.append(delay)
     return delays
-
 # Function to be imported
 async def task_wait_random(max_delay: int) -> float:
     """ Waits for random delay between 0 -'max_delay' and returns the delay.
