@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Task 2's module."""
+"""module."""
 
 import asyncio
 import time
