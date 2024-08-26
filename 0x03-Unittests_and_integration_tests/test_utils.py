@@ -6,7 +6,19 @@ from unittest.mock import patch
 
 
 def access_nested_map(nested_map, path):
-    """Access nested map with a path."""
+    """Access a nested dictionary with a sequence of keys.
+
+    Args:
+        nested_map (dict): The nested dictionary to access.
+        path (tuple): A sequence of keys to access the nested dictionary.
+
+    Returns:
+        The value associated with the given path in the nested dictionary.
+
+    Raises:
+        KeyError: If the given path is invalid or does not exist in the
+            nested dictionary.
+    """
     for key in path:
         if not isinstance(nested_map, dict) or key not in nested_map:
             raise KeyError(key)
@@ -15,14 +27,29 @@ def access_nested_map(nested_map, path):
 
 
 def get_json(url):
-    """Get JSON from remote URL."""
+    """Fetch JSON data from a remote URL.
+
+    Args:
+        url (str): The URL to fetch JSON data from.
+
+    Returns:
+        The JSON data retrieved from the remote URL.
+    """
     import requests
     response = requests.get(url)
     return response.json()
 
 
 def memoize(func):
-    """Memoize decorator."""
+    """Memoize the result of a function call for given arguments.
+
+    Args:
+        func (callable): The function to be memoized.
+
+    Returns:
+        A wrapped function that caches and returns the result of
+        calling the original function with the same arguments.
+    """
     cache = {}
 
     def wrapped(*args, **kwargs):
@@ -34,7 +61,7 @@ def memoize(func):
 
 
 class TestAccessNestedMap(unittest.TestCase):
-    """Class for testing access_nested_map function."""
+    """Test class for the access_nested_map function."""
 
     @parameterized.expand([
         ({"a": 1}, ("a",), 1),
@@ -42,7 +69,7 @@ class TestAccessNestedMap(unittest.TestCase):
         ({"a": {"b": 2}}, ("a", "b"), 2)
     ])
     def test_access_nested_map(self, nested_map, path, expected):
-        """Test that the method returns what it is supposed to."""
+        """Test that access_nested_map returns the expected value."""
         self.assertEqual(access_nested_map(nested_map, path), expected)
 
     @parameterized.expand([
@@ -50,21 +77,21 @@ class TestAccessNestedMap(unittest.TestCase):
         ({"a": 1}, ("a", "b"), 'b')
     ])
     def test_access_nested_map_exception(self, nested_map, path, expected):
-        """Test that a KeyError is raised for the respective inputs."""
+        """Test that access_nested_map raises KeyError for invalid paths."""
         with self.assertRaises(KeyError) as e:
             access_nested_map(nested_map, path)
         self.assertEqual(f"KeyError('{expected}')", repr(e.exception))
 
 
 class TestGetJson(unittest.TestCase):
-    """Class for Testing Get Json."""
+    """Test class for the get_json function."""
 
     @parameterized.expand([
         ("http://example.com", {"payload": True}),
         ("http://holberton.io", {"payload": False})
     ])
     def test_get_json(self, test_url, test_payload):
-        """Test for the get_json function to check expected result."""
+        """Test that get_json returns the expected JSON data."""
         config = {'return_value.json.return_value': test_payload}
         patcher = patch('requests.get', **config)
         mock = patcher.start()
@@ -74,15 +101,18 @@ class TestGetJson(unittest.TestCase):
 
 
 class TestMemoize(unittest.TestCase):
-    """Test class to test memoize."""
+    """Test class for the memoize decorator."""
 
     def test_memoize(self):
-        """Tests the function when calling a_property twice,
-        the correct result is returned but a_method is only
-        called once using assert_called_once."""
+        """Test memoization of a function call.
+
+        Ensure that when calling a_property twice, the correct result
+        is returned but a_method is only called once, as verified by
+        assert_called_once.
+        """
 
         class TestClass:
-            """Test Class for wrapping with memoize."""
+            """Test class for wrapping a method with memoize."""
 
             def a_method(self):
                 return 42
