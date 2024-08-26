@@ -22,7 +22,7 @@ class TestGithubOrgClient(unittest.TestCase):
             f'https://api.github.com/orgs/{input_org}')
 
     def test_public_repos_url(self):
-        """Verify that the _public_repos_url property returns the expected value"""
+        """Verify that the _public_repos_url returns the value"""
         with patch('client.GithubOrgClient.org',
                    new_callable=PropertyMock) as mock_org:
             payload = {"repos_url": "World"}
@@ -34,7 +34,7 @@ class TestGithubOrgClient(unittest.TestCase):
     @patch('client.get_json')
     def test_public_repos(self, mock_get_json):
         """
-        Verify that the public_repos method returns the expected list of repos
+        Verify that the public_repos method returns the list of repos
         and that the mocked property and get_json were called once
         """
         json_payload = [{"name": "Google"}, {"name": "Twitter"}]
