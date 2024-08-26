@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-""" Module for testing client """
+""" this is a Module for testing client """
 
 from client import GithubOrgClient
 from fixtures import TEST_PAYLOAD
@@ -18,13 +18,13 @@ class TestGithubOrgClient(unittest.TestCase):
         """Test that GithubOrgClient.org returns the correct value"""
         test_class = GithubOrgClient(input_org)
         test_class.org()
-        mock_get_json.assert_called_once_with(f'https://api.github.com/orgs/{input_org}')
+        mock_get_json.assert_called_once_with(
+            f'https://api.github.com/orgs/{input_org}')
 
     def test_public_repos_url(self):
-        """ Test that the result of _public_repos_url is the expected one
-        based on the mocked payload
-        """
-        with patch('client.GithubOrgClient.org', new_callable=PropertyMock) as mock_org:
+        """ Test that _public_repos_url is the expected one"""
+        with patch('client.GithubOrgClient.org',
+                   new_callable=PropertyMock) as mock_org:
             payload = {"repos_url": "World"}
             mock_org.return_value = payload
             test_class = GithubOrgClient('test')
@@ -34,14 +34,14 @@ class TestGithubOrgClient(unittest.TestCase):
     @patch('client.get_json')
     def test_public_repos(self, mock_get_json):
         """
-        Test that the list of repos is what you expect from the chosen payload.
-        Test that the mocked property and the mocked get_json was called once.
+        Test repos list is as expected from the payload.
+        Test that mocked property and get_json were called once.
         """
         json_payload = [{"name": "Google"}, {"name": "Twitter"}]
         mock_get_json.return_value = json_payload
 
         with patch('client.GithubOrgClient._public_repos_url',
-            new_callable=PropertyMock) as mock_public_repos_url:
+                   new_callable=PropertyMock) as mock_public_repos_url:
             mock_public_repos_url.return_value = "hello/world"
             test_class = GithubOrgClient('test')
             result = test_class.public_repos()
@@ -71,7 +71,7 @@ class TestIntegrationGithubOrgClient(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        """A class method called before tests in an individual class are run"""
+        """A class method called before tests in an individual class run"""
         config = {
             'return_value.json.side_effect': [
                 cls.org_payload, cls.repos_payload,
@@ -97,10 +97,11 @@ class TestIntegrationGithubOrgClient(unittest.TestCase):
 
         self.assertEqual(test_class.public_repos(), self.expected_repos)
         self.assertEqual(test_class.public_repos("XLICENSE"), [])
-        self.assertEqual(test_class.public_repos("apache-2.0"), self.apache2_repos)
+        self.assertEqual(test_class.public_repos("apache-2.0"),
+                         self.apache2_repos)
         self.mock_get.assert_called()
 
     @classmethod
     def tearDownClass(cls):
-        """A class method called after tests in an individual class have run"""
+        """A class method called after tests in individual class run"""
         cls.get_patcher.stop()
