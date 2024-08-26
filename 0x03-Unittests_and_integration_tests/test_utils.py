@@ -6,7 +6,7 @@ from unittest.mock import patch
 
 
 def access_nested_map(nested_map, path):
-    """Access a nested dictionary with the given path"""
+    """Access a nested map with the given path"""
     for key in path:
         if key not in nested_map:
             raise KeyError(key)
@@ -15,7 +15,7 @@ def access_nested_map(nested_map, path):
 
 
 def get_json(url):
-    """Get JSON from a URL"""
+    """Get JSON from the given URL"""
     import requests
     response = requests.get(url)
     return response.json()
@@ -75,7 +75,7 @@ class TestGetJson(unittest.TestCase):
 
 
 class TestMemoize(unittest.TestCase):
-    """Test class to test memoize"""
+    """Test class to test memoize function"""
 
     def test_memoize(self):
         """Tests the function when calling a_property twice,
