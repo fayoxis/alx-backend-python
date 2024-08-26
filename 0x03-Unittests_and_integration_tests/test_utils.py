@@ -2,11 +2,7 @@
 """
 This module contains test cases for utility 
 functions implemented in the 'utils' module.
-The test cases cover the following functions:
-- access_nested_map: Retrieves values from a nested 
-dictionary using a provided path.
-- get_json: Fetches JSON data from a given URL.
-- memoize: A decorator that caches the results of a function call.
+The test cases cover the following functions
 """
 import unittest
 from unittest.mock import patch
