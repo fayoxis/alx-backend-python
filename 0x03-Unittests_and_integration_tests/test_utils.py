@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """
 Module to test the utils file.
-This module contains test cases for the access_nested_map, get_json, and memoize functions.
+This module contains test cases for the 
+access_nested_map, get_json, and memoize functions.
 """
 from parameterized import parameterized
 import unittest
@@ -21,7 +22,8 @@ class TestAccessNestedMap(unittest.TestCase):
     ])
     def test_access_nested_map(self, nested_map, path, expected):
         """
-        Test that the access_nested_map function returns the expected value.
+        Test that the access_nested_map f
+        unction returns the expected value.
         """
         self.assertEqual(access_nested_map(nested_map, path), expected)
 
@@ -31,7 +33,8 @@ class TestAccessNestedMap(unittest.TestCase):
     ])
     def test_access_nested_map_exception(self, nested_map, path, expected):
         """
-        Test that a KeyError is raised when accessing a non-existent key in the nested map.
+        Test that a KeyError is raised when 
+        accessing a non-existent key in the nested map.
         """
         with self.assertRaises(KeyError) as e:
             access_nested_map(nested_map, path)
