@@ -31,7 +31,7 @@ class TestAccessNestedMap(unittest.TestCase):
         ({"a": 1}, ("a", "b"), 'b')
     ])
     def test_access_nested_map_exception(self, nested_map, path, expected):
-        """Check if KeyError is raised non-existent keys in the nested map."""
+        """Check if KeyError is raised non-existent keys in nested map."""
         with self.assertRaises(KeyError) as context:
             access_nested_map(nested_map, path)
         self.assertEqual(str(context.exception), f"'{expected}'")
@@ -45,7 +45,7 @@ class TestGetJson(unittest.TestCase):
         ("http://holberton.io", {"payload": False})
     ])
     def test_get_json(self, url, expected_payload):
-        """ get_json returns the expected payload from mocked-JSON response."""
+        """ get_json returns expected payload from mocked-JSON response."""
         with patch('requests.get') as mock_get:
             mock_get.return_value.json.return_value = expected_payload
             self.assertEqual(get_json(url), expected_payload)
@@ -56,7 +56,7 @@ class TestMemoize(unittest.TestCase):
     """Test suite for the memoize decorator."""
 
     def test_memoize(self):
-        """Verify the memoize decorator caches the results decorated method."""
+        """Verify the memoize decorator caches the decorated method."""
 
         class TestClass:
             def a_method(self):
