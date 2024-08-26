@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-""" this is a Module for testing client """
+"""Module to test the GithubOrgClient class"""
 
 from client import GithubOrgClient
 from fixtures import TEST_PAYLOAD
@@ -10,19 +10,19 @@ from unittest.mock import patch, PropertyMock, Mock
 
 
 class TestGithubOrgClient(unittest.TestCase):
-    """ Class for Testing Github Org Client """
+    """Test cases for the GithubOrgClient class"""
 
     @parameterized.expand([('google',), ('abc',)])
     @patch('client.get_json')
     def test_org(self, input_org, mock_get_json):
-        """Test that GithubOrgClient.org returns the correct value"""
+        """Verify that the org method returns the correct value"""
         test_class = GithubOrgClient(input_org)
         test_class.org()
         mock_get_json.assert_called_once_with(
             f'https://api.github.com/orgs/{input_org}')
 
     def test_public_repos_url(self):
-        """ Test that _public_repos_url is the expected one"""
+        """Verify that the _public_repos_url property returns the expected value"""
         with patch('client.GithubOrgClient.org',
                    new_callable=PropertyMock) as mock_org:
             payload = {"repos_url": "World"}
@@ -34,8 +34,8 @@ class TestGithubOrgClient(unittest.TestCase):
     @patch('client.get_json')
     def test_public_repos(self, mock_get_json):
         """
-        Test repos list is as expected from the payload.
-        Test that mocked property and get_json were called once.
+        Verify that the public_repos method returns the expected list of repos
+        and that the mocked property and get_json were called once
         """
         json_payload = [{"name": "Google"}, {"name": "Twitter"}]
         mock_get_json.return_value = json_payload
@@ -57,7 +57,7 @@ class TestGithubOrgClient(unittest.TestCase):
         ({"license": {"key": "other_license"}}, "my_license", False)
     ])
     def test_has_license(self, repo, license_key, expected):
-        """ unit-test for GithubOrgClient.has_license """
+        """Test the has_license method with different inputs"""
         result = GithubOrgClient.has_license(repo, license_key)
         self.assertEqual(result, expected)
 
@@ -67,11 +67,11 @@ class TestGithubOrgClient(unittest.TestCase):
     TEST_PAYLOAD
 )
 class TestIntegrationGithubOrgClient(unittest.TestCase):
-    """ Class for Integration test of fixtures """
+    """Integration tests for the GithubOrgClient class"""
 
     @classmethod
     def setUpClass(cls):
-        """A class method called before tests in an individual class run"""
+        """Set up the mock for the requests.get method"""
         config = {
             'return_value.json.side_effect': [
                 cls.org_payload, cls.repos_payload,
@@ -82,7 +82,7 @@ class TestIntegrationGithubOrgClient(unittest.TestCase):
         cls.mock_get = cls.get_patcher.start()
 
     def test_public_repos(self):
-        """ Integration test: public repos"""
+        """Integration test for the public_repos method"""
         test_class = GithubOrgClient("google")
 
         self.assertEqual(test_class.org, self.org_payload)
@@ -92,7 +92,7 @@ class TestIntegrationGithubOrgClient(unittest.TestCase):
         self.mock_get.assert_called()
 
     def test_public_repos_with_license(self):
-        """ Integration test for public repos with License """
+        """Integration test for public repos with a specific license"""
         test_class = GithubOrgClient("google")
 
         self.assertEqual(test_class.public_repos(), self.expected_repos)
@@ -103,5 +103,5 @@ class TestIntegrationGithubOrgClient(unittest.TestCase):
 
     @classmethod
     def tearDownClass(cls):
-        """A class method called after tests in individual class run"""
+        """Stop the mock for the requests.get method"""
         cls.get_patcher.stop()
