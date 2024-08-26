@@ -1,40 +1,19 @@
 #!/usr/bin/env python3
-"""Module to test utils file"""
+"""
+Module to test the utils file.
+This module contains test cases for the access_nested_map,
+get_json, and memoize functions.
+"""
 from parameterized import parameterized
 import unittest
+from utils import access_nested_map, get_json, memoize
 from unittest.mock import patch
 
 
-def access_nested_map(nested_map, path):
-    """Access a nested map with the given path"""
-    for key in path:
-        if key not in nested_map:
-            raise KeyError(key)
-        nested_map = nested_map[key]
-    return nested_map
-
-
-def get_json(url):
-    """Get JSON from the given URL"""
-    import requests
-    response = requests.get(url)
-    return response.json()
-
-
-def memoize(func):
-    """Memoize a function"""
-    cache = {}
-
-    def wrapper(*args, **kwargs):
-        key = str(args) + str(kwargs)
-        if key not in cache:
-            cache[key] = func(*args, **kwargs)
-        return cache[key]
-    return wrapper
-
-
 class TestAccessNestedMap(unittest.TestCase):
-    """Class for testing access_nested_map function"""
+    """
+    Test cases for the access_nested_map function.
+    """
 
     @parameterized.expand([
         ({"a": 1}, ("a",), 1),
@@ -42,7 +21,9 @@ class TestAccessNestedMap(unittest.TestCase):
         ({"a": {"b": 2}}, ("a", "b"), 2)
     ])
     def test_access_nested_map(self, nested_map, path, expected):
-        """Test that the method returns what it is supposed to"""
+        """
+        Test that the access_nested_map function returns the expected value.
+        """
         self.assertEqual(access_nested_map(nested_map, path), expected)
 
     @parameterized.expand([
@@ -50,22 +31,28 @@ class TestAccessNestedMap(unittest.TestCase):
         ({"a": 1}, ("a", "b"), 'b')
     ])
     def test_access_nested_map_exception(self, nested_map, path, expected):
-        """Test that a KeyError is raised for the respective inputs"""
+        """
+        Test that a KeyError is raised when accessing a
+        non-existent key in the nested map.
+        """
         with self.assertRaises(KeyError) as e:
             access_nested_map(nested_map, path)
         self.assertEqual(f"KeyError('{expected}')", repr(e.exception))
 
 
 class TestGetJson(unittest.TestCase):
-    """Class for Testing Get Json"""
+    """
+    Test cases for the get_json function.
+    """
 
     @parameterized.expand([
         ("http://example.com", {"payload": True}),
         ("http://holberton.io", {"payload": False})
     ])
     def test_get_json(self, test_url, test_payload):
-        """Test for the utils.get_json function to check
-        that it returns the expected result."""
+        """
+        Test that the get_json function returns the expected payload.
+        """
         config = {'return_value.json.return_value': test_payload}
         patcher = patch('requests.get', **config)
         mock = patcher.start()
@@ -75,15 +62,19 @@ class TestGetJson(unittest.TestCase):
 
 
 class TestMemoize(unittest.TestCase):
-    """Test class to test memoize function"""
+    """
+    Test cases for the memoize decorator.
+    """
 
     def test_memoize(self):
-        """Tests the function when calling a_property twice,
-        the correct result is returned but a_method is only
-        called once using assert_called_once"""
+        """
+        Test that the memoize decorator caches the result of a method.
+        """
 
         class TestClass:
-            """Test Class for wrapping with memoize"""
+            """
+            Test class to wrap a method with the memoize decorator.
+            """
 
             def a_method(self):
                 return 42
@@ -97,7 +88,3 @@ class TestMemoize(unittest.TestCase):
             test_class.a_property()
             test_class.a_property()
             mock.assert_called_once()
-
-
-if __name__ == '__main__':
-    unittest.main()
