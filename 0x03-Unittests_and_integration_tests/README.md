@@ -1,7 +1,7 @@
 # 🧮Unit and Integration Testing in Python
 This project demonstrates how to write unit and integration tests using the Python's built-in unittest framework and the mock object library. The goal is to showcase effective techniques for testing different components of a Python application.
 
-🧮The key objectives of this project are:
+# 🧮The key objectives of this project are:
 
 1. **Unit Testing**: Develop comprehensive unit tests to verify the correctness of individual components or modules in isolation.
 2. **Integration Testing**: Create integration tests to ensure the correct interaction and communication between various modules or subsystems.
